@@ -29,16 +29,22 @@ function App() {
   }
 
   useEffect(() => {
+    let filteredArray = arrayFilms
 
-    if (selectedGenre === '') {
-      setFilmFiltered(arrayFilms);
+    if (selectedGenre !== '') {
+      filteredArray = filteredArray.filter(film => film.genre.includes(selectedGenre));
+
     }
 
-    else {
-      const filteredArray = arrayFilms.filter(film => film.genre.includes(selectedGenre));
-      setFilmFiltered(filteredArray);
+    if (selectedTitle !== '') {
+      filteredArray = filteredArray.filter(film => film.title.includes(selectedTitle));
+
 
     };
+
+    setFilmFiltered(filteredArray);
+
+
 
   }, [selectedGenre, selectedTitle])
 
