@@ -16,6 +16,24 @@ function App() {
   const [filmFiltered, setFilmFiltered] = useState(arrayFilms);
   const [selectedTitle, setSelectedTitle] = useState("");
 
+  const [newTitle, setNewTitle] = useState("");
+  const [newGenre, setNewGenre] = useState("");
+
+  const addFilm = () => {
+
+    const newFilm = {
+      title: newTitle,
+      genre: newGenre
+    }
+
+    const arrayUpdate = [...arrayFilms, newFilm];
+    setFilmFiltered(arrayUpdate);
+    arrayFilms.push(newFilm);
+
+    setNewTitle("");
+    setNewGenre("")
+  }
+
 
   const generiUnici = [];
   const newArrayTitle = [...arrayFilms]
@@ -93,6 +111,16 @@ function App() {
               })}
             </ul>
           </div>
+        </div>
+
+        <div className="row">
+          <div className="col-12 mb-4">
+            <h4>Aggiungi un nuovo Film</h4>
+            <input placeholder='Titolo' className='form-control mb-2' type="text" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} />
+            <input placeholder='Genere' className='form-control mb-2' type="text" value={newGenre} onChange={(e) => setNewGenre(e.target.value)} />
+          </div>
+
+          <button className='btn btn-primary' onClick={addFilm}>Aggiungi Film</button>
         </div>
       </div>
     </>
