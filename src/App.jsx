@@ -26,10 +26,17 @@ function App() {
   }
 
   useEffect(() => {
-    const filteredArray = arrayFilms.filter((film) => {
-      return film.genre.includes(selectedGenre)
-    });
-    setFilmFiltered(filteredArray);
+
+    if (selectedGenre === '') {
+      setFilmFiltered(arrayFilms);
+    }
+
+    else {
+      const filteredArray = arrayFilms.filter(film => film.genre.includes(selectedGenre));
+      setFilmFiltered(filteredArray);
+
+    };
+
   }, [selectedGenre])
 
   return (
@@ -42,7 +49,7 @@ function App() {
           <select class="form-select mb-4" aria-label="Default select example"
             value={selectedGenre}
             onChange={e => setSelectedGenre(e.target.value)}>
-            <option selected>Cerca per genere</option>
+            <option selected value={''}>Cerca per genere</option>
             {generiUnici.map((genere) => {
               return (
                 <option value={genere}>{genere}</option>
