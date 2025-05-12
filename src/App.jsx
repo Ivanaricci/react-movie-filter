@@ -12,7 +12,15 @@ const arrayFilms = [
 
 function App() {
 
-  useEffect
+  const generiUnici = [];
+
+  for (let i = 0; i < arrayFilms.length; i++) {
+    const genre = arrayFilms[i].genre;
+
+    if (!generiUnici.includes(genre)) {
+      generiUnici.push(genre)
+    }
+  }
 
   return (
     <>
@@ -21,6 +29,18 @@ function App() {
           <div className="col12">
             <h1>Lista Film</h1>
           </div>
+          <select class="form-select" aria-label="Default select example">
+            <option selected>Cerca per genere</option>
+            {generiUnici.map((genere) => {
+              return (
+                <option value={genere}>{genere}</option>
+              )
+            })}
+
+
+
+
+          </select>
           <div className="col12">
             <ul className="list-group">
               {arrayFilms.map((film) => {
