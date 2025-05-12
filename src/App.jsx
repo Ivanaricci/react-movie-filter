@@ -14,8 +14,11 @@ function App() {
 
   const [selectedGenre, setSelectedGenre] = useState("");
   const [filmFiltered, setFilmFiltered] = useState(arrayFilms);
+  const [selectedTitle, setSelectedTitle] = useState("");
+
 
   const generiUnici = [];
+  const newArrayTitle = [...arrayFilms]
 
   for (let i = 0; i < arrayFilms.length; i++) {
     const genre = arrayFilms[i].genre;
@@ -37,7 +40,7 @@ function App() {
 
     };
 
-  }, [selectedGenre])
+  }, [selectedGenre, selectedTitle])
 
   return (
     <>
@@ -49,17 +52,29 @@ function App() {
           <select class="form-select mb-4" aria-label="Default select example"
             value={selectedGenre}
             onChange={e => setSelectedGenre(e.target.value)}>
-            <option selected value={''}>Cerca per genere</option>
+            <option value={''}>Cerca per genere</option>
             {generiUnici.map((genere) => {
               return (
-                <option value={genere}>{genere}</option>
+                <option key={genere} value={genere}>{genere}</option>
               )
             })}
-
-
-
-
           </select>
+
+          <select class="form-select mb-4" aria-label="Default select example"
+            value={selectedTitle}
+            onChange={e => setSelectedTitle(e.target.value)}>
+            <option value={''}>Cerca per Titolo</option>
+            {newArrayTitle.map((film) => {
+              return (
+                <option key={film.title} value={film.title}>{film.title}</option>
+              )
+            })}
+          </select>
+
+
+
+
+
           <div className="col12">
             <ul className="list-group">
               {filmFiltered.map((film) => {
